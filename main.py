@@ -7,7 +7,7 @@ bg_color = (255, 255, 255)
 width, height = 1080, 720
 game_loop = True
 
-tower1 = Tower(["Big", "Mid", "Small"])
+tower1 = Tower([0, 1, 2])
 tower2 = Tower([])
 tower3 = Tower([])
 
@@ -29,7 +29,8 @@ def get_operation(operator):
     if remove_tower == add_tower:
         raise Exception()
 
-    # TODO: Check for Larger on top of Small problem
+    if add_tower.top is not None and add_tower.top > remove_tower.top:
+        raise Exception("lmao")
 
     popped_ring = remove_tower.pop()
     add_tower.push(popped_ring)
@@ -41,12 +42,12 @@ while game_loop:
     #         game_loop = False
 
     try:
-        print(f"Tower 1: {tower1.rings}")
-        print(f"Tower 2: {tower2.rings}")
-        print(f"Tower 3: {tower3.rings}")
+        print(f"Tower 1: {tower1}")
+        print(f"Tower 2: {tower2}")
+        print(f"Tower 3: {tower3}")
         print()
 
-        if tower3.rings == ["Big", "Mid", "Small"]:
+        if tower3.rings == [0, 1, 2]:
             print("You win!")
             game_loop = False
         else:

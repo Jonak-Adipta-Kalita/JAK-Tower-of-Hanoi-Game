@@ -1,17 +1,28 @@
+ring_hierarchy = {
+    0: "Big",
+    1: "Medium",
+    2: "Small"
+}
+
+
 class Tower:
     def __init__(self, rings: list):
         self.rings = rings
-        self.top = None if rings == [] else len(rings)
+        self.top = None if rings == [] else rings[len(rings) - 1]
+
+    def __repr__(self):
+        return str([ring_hierarchy[i] for i in self.rings]) + f" -> {self.top}"
 
     def push(self, ring: str):
         self.rings.append(ring)
-        self.top = 0 if self.top is None else self.top + 1
+        self.top = ring
 
     def pop(self) -> str:
         if self.top is None:
             raise Exception()
 
-        self.top = None if self.top == 0 else self.top - 1
+        self.top = None if len(
+            self.rings) == 1 else self.rings[len(self.rings) - 2]
 
         return self.rings.pop()
 
