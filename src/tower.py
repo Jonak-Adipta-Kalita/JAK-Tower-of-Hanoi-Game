@@ -27,7 +27,7 @@ class Tower:
         return self.rings.pop()
 
 
-class Organizer:
+class TowerOrganizer:
     def __init__(self, **towers):
         self.towers = towers
 
