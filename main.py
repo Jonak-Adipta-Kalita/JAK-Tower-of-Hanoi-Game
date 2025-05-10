@@ -25,6 +25,7 @@ while game_loop:
 
         if game.did_win():
             print(f"You win in {game.moves} Moves!")
+            del game
             game_loop = False
         else:
             game.perform_operation(str(input(">> ")))
