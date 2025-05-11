@@ -4,7 +4,7 @@ from src.tower import Tower, TowerOrganizer
 class Game:
     def __init__(self):
         self.towers = [
-            Tower([0, 1, 2, 3]), Tower([]), Tower([])
+            Tower([0, 1, 2, 3]), Tower([]), Tower([]), Tower([])
         ]
         self.moves = 0
         self.organizer = TowerOrganizer(
