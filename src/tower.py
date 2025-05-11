@@ -1,7 +1,8 @@
 ring_hierarchy = {
     0: "Big",
     1: "Medium",
-    2: "Small"
+    2: "Small",
+    3: "Very Small"
 }
 
 

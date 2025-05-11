@@ -4,13 +4,14 @@ from src.tower import Tower, TowerOrganizer
 class Game:
     def __init__(self):
         self.towers = [
-            Tower([0, 1, 2]), Tower([]), Tower([])
+            Tower([0, 1, 2, 3]), Tower([]), Tower([])
         ]
         self.moves = 0
         self.organizer = TowerOrganizer(
             tower1=self.towers[0],
             tower2=self.towers[1],
-            tower3=self.towers[2]
+            tower3=self.towers[2],
+            tower4=self.towers[3]
         )
 
     def perform_operation(self, operation: str):
@@ -33,6 +34,7 @@ class Game:
         print(f"Tower 1: {self.towers[0]}")
         print(f"Tower 2: {self.towers[1]}")
         print(f"Tower 3: {self.towers[2]}")
+        print(f"Tower 4: {self.towers[3]}")
 
     def did_win(self) -> bool:
-        return bool(self.towers[2].rings == [0, 1, 2])
+        return bool(self.towers[2].rings == [0, 1, 2, 3])
