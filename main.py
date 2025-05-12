@@ -20,7 +20,7 @@ background = pygame.image.load("assets/background.png").convert()
 background = pygame.transform.scale(background, DIMENSIONS)
 
 while game_loop:
-    draw_init_screen(screen, background)
+    draw_init_screen(screen, background, len(game.towers[0].rings))
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
