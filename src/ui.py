@@ -1,9 +1,8 @@
-from src.constants import GRAY_COLOR, DIMENSIONS
-from src.utils import section_formula, distance_formula
+from src.constants import GRAY_COLOR, DIMENSIONS, RING_LENGTH
+from src.utils import section_formula
 import pygame
 
 width, height = DIMENSIONS
-RING_LENGTH = 100
 
 bl_pos = ((width/9, 3.5/5 * height), (8/9 * width, 3.5/5 * height))
 
@@ -17,7 +16,7 @@ tower2_pos = (tower2_width, tower_height_i), (tower2_width, bl_pos[1][1])
 tower3_pos = (tower3_width, tower_height_i), (tower3_width, bl_pos[1][1])
 
 
-def test(tower_pos):
+def get_base_ring_pos(tower_pos):
     big_r_i = (tower_pos[1][0]-RING_LENGTH, tower_pos[1][1]-5)
     big_r_f = (tower_pos[1][0]+RING_LENGTH, tower_pos[1][1]-5)
 
@@ -28,12 +27,10 @@ def test(tower_pos):
 def get_tower1_rings_dimensions(rings: int) -> list:
     dimensions = []
 
-    big_r = test(tower1_pos)
-    big_r_2 = test(tower2_pos)
-    big_r_3 = test(tower3_pos)
+    big_r = get_base_ring_pos(tower1_pos)
     dimensions.append(big_r)
-    dimensions.append(big_r_2)
-    dimensions.append(big_r_3)
+
+    # Now, for the rest of the "rings" rings
 
     return dimensions
 
@@ -48,5 +45,5 @@ def draw_init_screen(screen, bg, rings):
     pygame.draw.line(screen, GRAY_COLOR, tower3_pos[0], tower3_pos[1], 5)
 
     rings_dimensions = get_tower1_rings_dimensions(rings)
-    for i in rings_dimensions:
-        pygame.draw.line(screen, GRAY_COLOR, i[0], i[1], 5)
+    for dim in rings_dimensions:
+        pygame.draw.line(screen, GRAY_COLOR, dim[0], dim[1], 5)
