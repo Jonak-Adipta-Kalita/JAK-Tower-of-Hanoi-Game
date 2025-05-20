@@ -1,9 +1,10 @@
-from src.constants import GRAY_COLOR, ORANGE_COLOR, PINK_COLOR, PURPLE_COLOR
-from src.constants import DIMENSIONS, RING_LENGTH
+from src.constants import GRAY_COLOR, ORANGE_COLOR
+from src.constants import DIMENSIONS, RING_HIERARCHY
 from src.utils import section_formula, distance_formula
 import pygame
 
 width, height = DIMENSIONS
+RING_LENGTH = RING_HIERARCHY[0]["ring_length"]
 
 bl_pos = ((width/9, 3.5/5 * height), (8/9 * width, 3.5/5 * height))
 
@@ -12,13 +13,17 @@ tower1_width = section_formula(bl_pos[0][0], width / 2, 1, 2)
 tower2_width = width / 2
 tower3_width = section_formula(width / 2, bl_pos[1][0], 2, 1)
 
-tower1_pos = (tower1_width, tower_height_i), (tower1_width, bl_pos[1][1])
-tower2_pos = (tower2_width, tower_height_i), (tower2_width, bl_pos[1][1])
-tower3_pos = (tower3_width, tower_height_i), (tower3_width, bl_pos[1][1])
+tower1_pos = ((tower1_width, tower_height_i), (tower1_width, bl_pos[1][1]))
+tower2_pos = ((tower2_width, tower_height_i), (tower2_width, bl_pos[1][1]))
+tower3_pos = ((tower3_width, tower_height_i), (tower3_width, bl_pos[1][1]))
+
+
+def draw_ring(ring_size: int, mid_point: tuple):
+    height = RING_HIERARCHY[ring_size]["height"]
 
 
 def get_base_ring_pos(tower_pos):
-    height = 50
+    height = RING_HIERARCHY[0]["height"]
 
     big_r_i = (tower_pos[1][0]-RING_LENGTH, tower_pos[1][1]-2)
     big_r_f = (tower_pos[1][0]+RING_LENGTH, tower_pos[1][1]-2)
@@ -36,7 +41,7 @@ def get_tower1_rings_dimensions(rings: int) -> list:
     big_r = get_base_ring_pos(tower1_pos)
     dimensions.append(big_r)
 
-    # Now, for the rest of the "rings" rings
+    # TODO: Now, for the rest of the "rings" rings
 
     return dimensions
 

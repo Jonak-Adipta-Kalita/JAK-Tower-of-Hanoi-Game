@@ -1,9 +1,4 @@
-ring_hierarchy = {
-    0: "Big",
-    1: "Medium",
-    2: "Small",
-    3: "Very Small"
-}
+from src.constants import RING_HIERARCHY
 
 
 class Tower:
@@ -12,7 +7,9 @@ class Tower:
         self.top = None if rings == [] else rings[len(rings) - 1]
 
     def __repr__(self):
-        return str([ring_hierarchy[i] for i in self.rings]) + f" -> {self.top}"
+        return str([
+            RING_HIERARCHY[i].title for i in self.rings
+        ]) + f" -> {self.top}"
 
     def push(self, ring: str):
         self.rings.append(ring)
