@@ -15,19 +15,19 @@ RING_HIERARCHY = {
     },
     1: {
         "title": "Medium",
-        "height": DIMENSIONS[1]/13.5,
+        "height": DIMENSIONS[1]/12,
         "color": PURPLE_COLOR,
         "ring_length": DIMENSIONS[0] / 12
     },
     2: {
         "title": "Small",
-        "height": DIMENSIONS[1]/18,
+        "height": DIMENSIONS[1]/13.5,
         "color": BLUE_COLOR,
         "ring_length": DIMENSIONS[0] / 16
     },
     3: {
         "title": "Very Small",
-        "height": DIMENSIONS[1]/27,
+        "height": DIMENSIONS[1]/15.5,
         "color": PINK_COLOR,
         "ring_length": DIMENSIONS[0] / 24
     }
