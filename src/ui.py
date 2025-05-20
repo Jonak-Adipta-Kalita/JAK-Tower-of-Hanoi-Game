@@ -34,9 +34,7 @@ def draw_ring(screen, ring_size: int, mid_point: tuple) -> tuple:
     return (mid_point[0], init_dim[1]+3)
 
 
-def draw_init_screen(screen, bg, rings):
-    screen.blit(bg, (0, 0))
-
+def draw_init_screen(screen, rings):
     pygame.draw.line(screen, GRAY_COLOR, bl_pos[0], bl_pos[1], 5)
 
     pygame.draw.line(screen, GRAY_COLOR, tower1_pos[0], tower1_pos[1], 5)

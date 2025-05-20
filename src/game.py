@@ -30,11 +30,5 @@ class Game:
         popped_ring = remove_tower.pop()
         add_tower.push(popped_ring)
 
-    def print_status(self):
-        print(f"Tower 1: {self.towers[0]}")
-        print(f"Tower 2: {self.towers[1]}")
-        print(f"Tower 3: {self.towers[2]}")
-        print(f"Tower 4: {self.towers[3]}")
-
     def did_win(self) -> bool:
         return bool(self.towers[2].rings == [0, 1, 2, 3])
