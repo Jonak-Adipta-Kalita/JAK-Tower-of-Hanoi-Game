@@ -46,7 +46,7 @@ def draw_ui(screen, game: Game, font):
     if len(game.selected_towers) > 0:
         the_text = f"{game.selected_towers[0]}->"
         if len(game.selected_towers) > 1:
-            the_text + str(game.selected_towers[1])
+            the_text += str(game.selected_towers[1])
         move_text = font.render(the_text, True, GRAY_COLOR)
         text_rect = move_text.get_rect(
             center=(DIMENSIONS[0]/2, DIMENSIONS[1]/8))

@@ -8,7 +8,7 @@ class Tower:
 
     def __repr__(self):
         return str([
-            RING_HIERARCHY[i].title for i in self.rings
+            RING_HIERARCHY[i]["title"] for i in self.rings
         ]) + f" -> {self.top}"
 
     def push(self, ring: str):
