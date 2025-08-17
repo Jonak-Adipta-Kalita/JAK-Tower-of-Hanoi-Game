@@ -1,8 +1,9 @@
+from src.db import Database
 from src.tower import Tower, TowerOrganizer
 
 
 class Game:
-    def __init__(self):
+    def __init__(self, database: Database):
         self.towers = [
             Tower([0, 1, 2, 3]), Tower([]), Tower([])
         ]
@@ -14,6 +15,7 @@ class Game:
         )
         self.selected_towers = []
         self.show_error: bool = False
+        self.db = database
 
     def perform_operation(self):
         try:

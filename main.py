@@ -1,14 +1,21 @@
 from src.game import Game
 from src.constants import DIMENSIONS, GRAY_COLOR
 from src.ui import draw_ui
+from src.db import Database
 
 import pygame
 import sys
 
+print()
+database = Database()
+database.login_or_register()
+print()
+print("Enjoy the Game!")
+
 game_loop = True
 
 pygame.init()
-game = Game()
+game = Game(database)
 
 screen = pygame.display.set_mode(DIMENSIONS)
 pygame.display.set_caption("JAK Tower of Hanoi Game")
@@ -26,6 +33,7 @@ while game_loop:
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            database.close_db()
             game_loop = False
 
         if (event.type == pygame.KEYDOWN
