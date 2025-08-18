@@ -43,6 +43,7 @@ while game_loop:
             game.selected_towers.append(event.unicode)
 
     if game.did_win():
+        game.store_highscore()
         win_text = font.render(
             f"You win in {game.moves} Moves!", True, GRAY_COLOR)
         text_rect = win_text.get_rect(

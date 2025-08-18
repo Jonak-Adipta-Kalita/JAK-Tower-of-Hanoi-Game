@@ -2,7 +2,7 @@ import os
 import mysql
 import mysql.connector
 
-from dotenv import load_dotenv
+from dotenv import load_dotenv # type: ignore
 
 load_dotenv()
 
@@ -15,6 +15,9 @@ class Database:
             database="tower_of_hanoi",
         )
         self.cursor = self.db.cursor()
+
+        self.curr_user = ""
+        self.stored_score_in_session = False
 
     def close_db(self):
         self.db.close()
@@ -41,5 +44,7 @@ class Database:
                 (username, password)
             )
             self.db.commit()
-        elif password != self.cursor.fetchall()[0]:
+        elif password != res[0][0]: # type: ignore
             raise Exception("Authentication Error | Password is Wrong!")
+
+        self.curr_user = username

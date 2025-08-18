@@ -42,4 +42,12 @@ class Game:
         return bool(len(self.selected_towers) == 2)
 
     def did_win(self) -> bool:
-        return bool(self.towers[2].rings == [0, 1, 2, 3])
+        # return bool(self.towers[2].rings == [0, 1, 2, 3])
+        return bool(self.moves == 2)
+
+    def store_highscore(self):
+        if self.db.stored_score_in_session == True:
+            return
+
+        self.db.stored_score_in_session = True
+        # LOGIC
