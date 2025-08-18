@@ -48,3 +48,7 @@ class Database:
             raise Exception("Authentication Error | Password is Wrong!")
 
         self.curr_user = username
+
+
+    def store_highscore(self, score: int, moves: int):
+        self.stored_score_in_session = True
