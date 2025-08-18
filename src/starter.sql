@@ -10,8 +10,7 @@ CREATE TABLE players (
 );
 
 CREATE TABLE scores (
-    id int auto_increment primary key,
-    score varchar(100) not null,
-    moves varchar(100) not null,
-    CONSTRAINT fk_score FOREIGN KEY (id) REFERENCES players(id) ON DELETE CASCADE
+    username varchar(100) primary key,
+    score int not null,
+    CONSTRAINT fk_score FOREIGN KEY (username) REFERENCES players(username) ON DELETE CASCADE
 )

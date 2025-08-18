@@ -49,6 +49,15 @@ class Database:
 
         self.curr_user = username
 
+    def store_highscore(self, score: int):
+        self.cursor.execute("SELECT score FROM scores WHERE username=%s", (self.curr_user,))
+        res = self.cursor.fetchall()
 
-    def store_highscore(self, score: int, moves: int):
+        if len(res) == 0:
+            self.cursor.execute("INSERT INTO scores (username, score) VALUES (%s, %s)", (self.curr_user, score,))
+            self.db.commit()
+        elif score > res[0][0]: # type: ignore
+            self.cursor.execute("UPDATE scores SET score=%s WHERE username=%s", (score, self.curr_user))
+            self.db.commit()
+
         self.stored_score_in_session = True

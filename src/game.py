@@ -7,7 +7,6 @@ class Game:
         self.towers = [
             Tower([0, 1, 2, 3]), Tower([]), Tower([])
         ]
-        self.score = 0
         self.moves = 0
         self.organizer = TowerOrganizer(
             tower1=self.towers[0],
@@ -33,21 +32,21 @@ class Game:
             if add_tower.top is not None and add_tower.top > remove_tower.top:
                 raise Exception()
 
-            self.moves += 1
             popped_ring = remove_tower.pop()
             add_tower.push(popped_ring)
         except Exception:
             self.show_error = True
 
+        self.moves += 1
+
     def has_inputs(self):
         return bool(len(self.selected_towers) == 2)
 
     def did_win(self) -> bool:
-        # return bool(self.towers[2].rings == [0, 1, 2, 3])
-        return bool(self.moves == 2)
+        return bool(self.towers[2].rings == [0, 1, 2, 3])
 
     def store_highscore(self):
         if self.db.stored_score_in_session == True:
             return
 
-        self.db.store_highscore(self.score, self.moves)
+        self.db.store_highscore(self.moves)
