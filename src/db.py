@@ -2,9 +2,10 @@ import os
 import mysql
 import mysql.connector
 
-from dotenv import load_dotenv # type: ignore
+from dotenv import load_dotenv  # type: ignore
 
 load_dotenv()
+
 
 class Database:
     def __init__(self):
@@ -35,29 +36,41 @@ class Database:
         username = input("Enter your Username: ")
         password = input("Enter your Password: ")
 
-        self.cursor.execute("SELECT password FROM players WHERE username=%s;", (username,))
+        self.cursor.execute(
+            "SELECT password FROM players WHERE username=%s;", (username,)
+        )
         res = self.cursor.fetchall()
 
         if len(res) == 0:
             self.cursor.execute(
                 "INSERT INTO players (username, password) VALUES (%s, %s)",
-                (username, password)
+                (username, password),
             )
             self.db.commit()
-        elif password != res[0][0]: # type: ignore
+        elif password != res[0][0]:  # type: ignore
             raise Exception("Authentication Error | Password is Wrong!")
 
         self.curr_user = username
 
     def store_highscore(self, score: int):
-        self.cursor.execute("SELECT score FROM scores WHERE username=%s", (self.curr_user,))
+        self.cursor.execute(
+            "SELECT score FROM scores WHERE username=%s", (self.curr_user,)
+        )
         res = self.cursor.fetchall()
 
         if len(res) == 0:
-            self.cursor.execute("INSERT INTO scores (username, score) VALUES (%s, %s)", (self.curr_user, score,))
+            self.cursor.execute(
+                "INSERT INTO scores (username, score) VALUES (%s, %s)",
+                (
+                    self.curr_user,
+                    score,
+                ),
+            )
             self.db.commit()
-        elif score > res[0][0]: # type: ignore
-            self.cursor.execute("UPDATE scores SET score=%s WHERE username=%s", (score, self.curr_user))
+        elif score < res[0][0]:  # type: ignore
+            self.cursor.execute(
+                "UPDATE scores SET score=%s WHERE username=%s", (score, self.curr_user)
+            )
             self.db.commit()
 
         self.stored_score_in_session = True
