@@ -5,9 +5,9 @@ import pygame
 
 width, height = DIMENSIONS
 
-bl_pos = ((width/9, 3.5/5 * height), (8/9 * width, 3.5/5 * height))
+bl_pos = ((width / 9, 3.5 / 5 * height), (8 / 9 * width, 3.5 / 5 * height))
 
-tower_height_i = bl_pos[0][1] * 1/3
+tower_height_i = bl_pos[0][1] * 1 / 3
 tower1_width = section_formula(bl_pos[0][0], width / 2, 1, 2)
 tower2_width = width / 2
 tower3_width = section_formula(width / 2, bl_pos[1][0], 2, 1)
@@ -24,19 +24,23 @@ def draw_ring(screen, ring_size: int, mid_point: tuple) -> tuple:
     color = RING_HIERARCHY[ring_size]["color"]
     ring_length = RING_HIERARCHY[ring_size]["ring_length"]
 
-    i = (mid_point[0]-ring_length, mid_point[1]-2)
-    f = (mid_point[0]+ring_length, mid_point[1]-2)
+    i = (mid_point[0] - ring_length, mid_point[1] - 2)
+    f = (mid_point[0] + ring_length, mid_point[1] - 2)
 
-    init_dim = (i[0], f[1]-height)
+    init_dim = (i[0], f[1] - height)
     width_dist = distance_formula(i, f)
     dim = (init_dim[0], init_dim[1], width_dist, height)
 
     pygame.draw.rect(screen, color, dim, 0, 5)
 
-    return (mid_point[0], init_dim[1]+3)
+    return (mid_point[0], init_dim[1] + 3)
 
 
 def draw_ui(screen, game: Game, font):
+    move_text = font.render(
+        f"Current Least Moves: {game.curr_highscore}", True, GRAY_COLOR
+    )
+    screen.blit(move_text, (5, 1))
     pygame.draw.line(screen, GRAY_COLOR, bl_pos[0], bl_pos[1], 5)
 
     pygame.draw.line(screen, GRAY_COLOR, tower1_pos[0], tower1_pos[1], 5)
@@ -48,8 +52,7 @@ def draw_ui(screen, game: Game, font):
         if len(game.selected_towers) > 1:
             the_text += str(game.selected_towers[1])
         move_text = font.render(the_text, True, GRAY_COLOR)
-        text_rect = move_text.get_rect(
-            center=(DIMENSIONS[0]/2, DIMENSIONS[1]/8))
+        text_rect = move_text.get_rect(center=(DIMENSIONS[0] / 2, DIMENSIONS[1] / 8))
         screen.blit(move_text, text_rect)
 
     for k, i in enumerate(game.towers):

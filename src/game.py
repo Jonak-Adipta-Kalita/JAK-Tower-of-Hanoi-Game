@@ -4,9 +4,7 @@ from src.tower import Tower, TowerOrganizer
 
 class Game:
     def __init__(self, database: Database):
-        self.towers = [
-            Tower([0, 1, 2, 3]), Tower([]), Tower([])
-        ]
+        self.towers = [Tower([0, 1, 2, 3]), Tower([]), Tower([])]
         self.moves = 0
         self.organizer = TowerOrganizer(
             tower1=self.towers[0],
@@ -16,6 +14,7 @@ class Game:
         self.selected_towers = []
         self.show_error: bool = False
         self.db = database
+        self.curr_highscore = self.db.get_curr_highscore() or 0
 
     def perform_operation(self):
         try:
@@ -49,4 +48,4 @@ class Game:
         if self.db.stored_score_in_session == True:
             return
 
-        self.db.store_highscore(self.moves)
+        self.db.store_highscore(self.curr_highscore, self.moves)

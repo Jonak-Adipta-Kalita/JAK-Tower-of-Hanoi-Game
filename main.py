@@ -36,18 +36,18 @@ while game_loop:
             database.close_db()
             game_loop = False
 
-        if (event.type == pygame.KEYDOWN
+        if (
+            event.type == pygame.KEYDOWN
             and event.key in [pygame.K_1, pygame.K_2, pygame.K_3]
-                and not game.has_inputs()):
+            and not game.has_inputs()
+        ):
             game.show_error = False
             game.selected_towers.append(event.unicode)
 
     if game.did_win():
         game.store_highscore()
-        win_text = font.render(
-            f"You win in {game.moves} Moves!", True, GRAY_COLOR)
-        text_rect = win_text.get_rect(
-            center=(DIMENSIONS[0]/2, DIMENSIONS[1]/2))
+        win_text = font.render(f"You win in {game.moves} Moves!", True, GRAY_COLOR)
+        text_rect = win_text.get_rect(center=(DIMENSIONS[0] / 2, DIMENSIONS[1] / 2))
         screen.blit(win_text, text_rect)
     else:
         draw_ui(screen, game, font)
@@ -55,7 +55,8 @@ while game_loop:
         if game.show_error:
             error_text = font.render("Invalid Move", True, GRAY_COLOR)
             text_rect = error_text.get_rect(
-                center=(DIMENSIONS[0]/2, DIMENSIONS[1] * 3.5/4))
+                center=(DIMENSIONS[0] / 2, DIMENSIONS[1] * 3.5 / 4)
+            )
             screen.blit(error_text, text_rect)
 
         if game.has_inputs():
