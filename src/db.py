@@ -77,3 +77,7 @@ class Database:
             self.db.commit()
 
         self.stored_score_in_session = True
+
+    def get_leaderboard_data(self):
+        self.cursor.execute("SELECT * FROM scores ORDER BY score ASC")
+        return self.cursor.fetchall()
